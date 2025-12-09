@@ -1,0 +1,883 @@
+/* ═══════════════════════════════════════════════════════════
+   情侣纪念网页 - 样式文件
+   主色调：淡蓝色 (#E6F4FF)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ===== 全局样式重置 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(135deg, #FFE5EC 0%, #FFC7D8 25%, #E5D4FF 50%, #C7E5FF 75%, #FFE5EC 100%);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+    color: #2C1B47;
+    position: relative;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== 浪漫背景动画容器 ===== */
+.animation-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* CSS生成的动态元素 */
+.animation-bg::before,
+.animation-bg::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+    animation: floatBlob 20s ease-in-out infinite;
+}
+
+.animation-bg::before {
+    background: radial-gradient(circle, #FFB6D9, #FFE5EC);
+    top: 10%;
+    left: 10%;
+}
+
+.animation-bg::after {
+    background: radial-gradient(circle, #D4A5FF, #E5D4FF);
+    bottom: 15%;
+    right: 10%;
+    animation-delay: 3s;
+}
+
+@keyframes floatBlob {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(50px, -50px) scale(1.1);
+    }
+    66% {
+        transform: translate(-30px, 30px) scale(0.9);
+    }
+}
+
+/* 装饰元素（爱心/星光/花瓣动图） */
+.float-decoration {
+    position: absolute;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* 爱心装饰 - 多个位置 */
+.heart-decoration {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    left: 5%;
+    animation: floatSlow 15s ease-in-out infinite;
+}
+
+.heart-decoration:nth-child(1) {
+    top: 20%;
+    right: 10%;
+    left: auto;
+    animation-delay: 2s;
+}
+
+/* 星光装饰 */
+.star-decoration {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    right: 8%;
+    animation: floatMedium 12s ease-in-out infinite;
+}
+
+.star-decoration:nth-child(2) {
+    top: 40%;
+    left: 15%;
+    right: auto;
+    animation-delay: 3s;
+}
+
+/* 花瓣装饰 */
+.petal-decoration {
+    width: 70px;
+    height: 70px;
+    bottom: 15%;
+    left: 10%;
+    animation: floatFast 10s ease-in-out infinite;
+}
+
+.petal-decoration:nth-child(3) {
+    bottom: 25%;
+    right: 12%;
+    left: auto;
+    animation-delay: 1.5s;
+}
+
+/* 飘动动画 */
+@keyframes floatSlow {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(-5deg);
+    }
+    75% {
+        transform: translateY(-25px) rotate(3deg);
+    }
+}
+
+@keyframes floatMedium {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    33% {
+        transform: translateY(-15px) rotate(-8deg) scale(1.05);
+    }
+    66% {
+        transform: translateY(-5px) rotate(8deg) scale(0.95);
+    }
+}
+
+@keyframes floatFast {
+    0%, 100% {
+        transform: translateX(0) translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(15px) translateY(-10px) rotate(10deg);
+    }
+    50% {
+        transform: translateX(-10px) translateY(-20px) rotate(-10deg);
+    }
+    75% {
+        transform: translateX(10px) translateY(-15px) rotate(5deg);
+    }
+}
+
+/* ===== 音乐控制按钮 ===== */
+.music-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #FFE5F1, #FFF0F8);
+    border: 2px solid rgba(255, 182, 217, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 182, 217, 0.3), 0 0 20px rgba(255, 182, 217, 0.2);
+    animation: musicPulse 3s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(255, 182, 217, 0.3), 0 0 20px rgba(255, 182, 217, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 30px rgba(255, 182, 217, 0.5), 0 0 30px rgba(255, 182, 217, 0.4);
+    }
+}
+
+.music-control:hover {
+    background: linear-gradient(135deg, #FFD0E5, #FFE5F1);
+    transform: scale(1.15) rotate(15deg);
+    box-shadow: 0 6px 30px rgba(255, 182, 217, 0.5), 0 0 40px rgba(255, 182, 217, 0.3);
+}
+
+.music-control:active {
+    transform: scale(0.95) rotate(-5deg);
+}
+
+/* ===== 页面容器 ===== */
+.page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    z-index: 10;
+    padding: 20px;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== 首页（封面页）样式 ===== */
+.cover-page {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.cover-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.75);
+}
+
+.cover-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: fadeInDown 1.5s ease;
+}
+
+.cover-title {
+    font-size: 4rem;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
+    letter-spacing: 3px;
+}
+
+.cover-subtitle {
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+    font-style: italic;
+}
+
+.start-btn {
+    padding: 1.2rem 3rem;
+    font-size: 1.3rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #FF9EC7, #FFB8D9, #FFC7E5);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 25px rgba(255, 158, 199, 0.4), 0 0 30px rgba(255, 158, 199, 0.2);
+    animation: buttonGlow 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.start-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.start-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.start-btn:hover {
+    background: linear-gradient(135deg, #FFB8D9, #FFC7E5, #FFD0EA);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 35px rgba(255, 158, 199, 0.6), 0 0 50px rgba(255, 158, 199, 0.3);
+}
+
+@keyframes buttonGlow {
+    0%, 100% {
+        box-shadow: 0 5px 25px rgba(255, 158, 199, 0.4), 0 0 30px rgba(255, 158, 199, 0.2);
+    }
+    50% {
+        box-shadow: 0 5px 35px rgba(255, 158, 199, 0.6), 0 0 50px rgba(255, 158, 199, 0.4);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* ===== 内页内容容器 ===== */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    gap: 2rem;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 布局样式 - 照片在上方 */
+.layout-top {
+    flex-direction: column;
+}
+
+/* 布局样式 - 照片在下方 */
+.layout-bottom {
+    flex-direction: column-reverse;
+}
+
+/* 布局样式 - 照片在左侧 */
+.layout-left {
+    flex-direction: row;
+    align-items: center;
+}
+
+/* ===== 照片样式 ===== */
+.memory-photo {
+    width: 50%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(255, 158, 199, 0.3), 0 5px 20px rgba(212, 165, 255, 0.2);
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.memory-photo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 60px rgba(255, 158, 199, 0.4), 0 10px 30px rgba(212, 165, 255, 0.3);
+}
+
+/* 照片淡入动画 */
+.fade-in {
+    animation: photoFadeIn 1s ease;
+}
+
+@keyframes photoFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===== 文本框样式 ===== */
+.text-box {
+    max-width: 600px;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(255, 240, 248, 0.9), rgba(255, 255, 255, 0.85));
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(255, 182, 217, 0.25), 0 0 20px rgba(255, 182, 217, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.text-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.love-text {
+    font-size: 1.8rem;
+    line-height: 1.8;
+    color: #4A2C5E;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 182, 217, 0.3);
+    animation: textFadeIn 1.5s ease 0.3s both;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes textFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== 导航按钮样式 ===== */
+.nav-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #E5A4CB, #F5C4DD);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(229, 164, 203, 0.3);
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-btn::after {
+    content: '→';
+    position: absolute;
+    right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.nav-btn:hover::after {
+    transform: translateX(5px);
+}
+
+.nav-btn:hover {
+    background: linear-gradient(135deg, #F5C4DD, #FFD4E8);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(229, 164, 203, 0.5);
+}
+
+.nav-btn:active {
+    transform: translateY(-1px);
+}
+
+/* 回到首页按钮特殊样式 */
+.home-btn {
+    background: linear-gradient(135deg, #C4A4E5, #D4B4F5);
+    font-weight: bold;
+}
+
+.home-btn::after {
+    content: '🏠';
+}
+
+.home-btn:hover {
+    background: linear-gradient(135deg, #D4B4F5, #E4C4FF);
+}
+
+/* ===== 响应式设计 - 平板 ===== */
+@media screen and (max-width: 1024px) {
+    .cover-title {
+        font-size: 3rem;
+    }
+    
+    .cover-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .memory-photo {
+        width: 60%;
+    }
+    
+    .love-text {
+        font-size: 1.6rem;
+    }
+}
+
+/* ===== 响应式设计 - 手机端 ===== */
+@media screen and (max-width: 768px) {
+    .page {
+        padding: 15px;
+    }
+    
+    .cover-title {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
+    
+    .cover-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .start-btn {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+    
+    /* 内页布局全部改为纵向 */
+    .content-wrapper,
+    .layout-left {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    /* 手机端照片占80%宽度 */
+    .memory-photo {
+        width: 80%;
+        max-width: none;
+    }
+    
+    .text-box {
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+    
+    .love-text {
+        font-size: 1.3rem;
+        line-height: 1.6;
+    }
+    
+    .nav-btn {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+    }
+    
+    /* 音乐控制按钮缩小 */
+    .music-control {
+        width: 45px;
+        height: 45px;
+        top: 15px;
+        right: 15px;
+        font-size: 20px;
+    }
+    
+    /* 装饰元素缩小 */
+    .float-decoration {
+        opacity: 0.3;
+    }
+    
+    .heart-decoration,
+    .star-decoration,
+    .petal-decoration {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* ===== 响应式设计 - 小屏手机 ===== */
+@media screen and (max-width: 480px) {
+    .cover-title {
+        font-size: 2rem;
+    }
+    
+    .cover-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .start-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .memory-photo {
+        width: 90%;
+    }
+    
+    .text-box {
+        padding: 1rem;
+    }
+    
+    .love-text {
+        font-size: 1.1rem;
+    }
+    
+    .nav-btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* ===== 横屏适配 ===== */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .page {
+        padding: 10px;
+    }
+    
+    .content-wrapper {
+        gap: 1rem;
+    }
+    
+    .memory-photo {
+        width: 60%;
+        max-height: 60vh;
+    }
+    
+    .text-box {
+        padding: 1rem;
+    }
+    
+    .love-text {
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+    
+    .nav-btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+}
+
+/* ===== 打印样式 ===== */
+@media print {
+    .animation-bg,
+    .music-control,
+    .nav-btn,
+    .start-btn {
+        display: none !important;
+    }
+    
+    .page {
+        position: relative;
+        page-break-after: always;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .cover-bg {
+        filter: brightness(1);
+    }
+}
+
+/* ===== 无障碍设计 ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   新增：动态生成的浪漫动画元素
+   ═══════════════════════════════════════════════════════════ */
+
+/* ===== 飘落的爱心 ===== */
+.floating-heart {
+    position: absolute;
+    top: -50px;
+    pointer-events: none;
+    z-index: 2;
+    animation: floatDown linear forwards;
+    text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+}
+
+@keyframes floatDown {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===== 闪烁的星星 ===== */
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #FFE5F1, #FFB8D9);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+    animation: twinkle ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(255, 184, 217, 0.8),
+                0 0 20px rgba(255, 184, 217, 0.5),
+                0 0 30px rgba(255, 184, 217, 0.3);
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+/* ===== 上升的气泡 ===== */
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    background: radial-gradient(circle at 30% 30%, 
+                rgba(255, 255, 255, 0.4), 
+                rgba(255, 184, 217, 0.2));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+    animation: riseUp linear forwards;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3),
+                0 0 20px rgba(255, 184, 217, 0.2);
+}
+
+@keyframes riseUp {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* ===== 点击粒子特效 ===== */
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #FFB8D9, #FF9EC7);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1001;
+    animation: particleBurst 1s ease-out forwards;
+    box-shadow: 0 0 10px rgba(255, 158, 199, 0.8);
+}
+
+@keyframes particleBurst {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* ===== 页面切换时的光晕效果 ===== */
+.page.active::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 184, 217, 0.3), transparent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: pageGlow 0.8s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes pageGlow {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 200vw;
+        height: 200vw;
+        opacity: 0;
+    }
+}
+
+/* ===== 照片加载时的光效 ===== */
+.memory-photo {
+    position: relative;
+}
+
+.memory-photo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.6), 
+                transparent);
+    animation: photoShine 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes photoShine {
+    0% {
+        left: -100%;
+    }
+    50%, 100% {
+        left: 100%;
+    }
+}
+
